@@ -1,0 +1,20 @@
+# Compiled class files
+target/
+*.class
+
+# IDE
+.idea/
+*.iml
+*.iws
+
+# Log files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Package files
+*.jar
+*.war
+*.zip
