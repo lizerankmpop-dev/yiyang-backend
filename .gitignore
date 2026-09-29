@@ -18,3 +18,9 @@ Thumbs.db
 *.jar
 *.war
 *.zip
+
+# Uploaded files
+uploads/
+
+# Local sensitive config (do not commit)
+application-local.yml

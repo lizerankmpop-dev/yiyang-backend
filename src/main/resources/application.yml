@@ -17,9 +17,10 @@ spring:
       file-size-threshold: 0B
 
   # 本地MySQL固定配置
+  # 安全性：账号密码通过环境变量注入（MYSQL_USERNAME / MYSQL_PASSWORD），请勿硬编码
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/yiyang?useUnicode=true&characterEncoding=utf8mb4&serverTimezone=Asia/Shanghai
-    username: yiyang
+    username: ${MYSQL_USERNAME:yiyang}
     password: ${MYSQL_PASSWORD:}
     hikari:
       minimum-idle: 5
@@ -27,9 +28,9 @@ spring:
 
   # Redis本地默认（没装Redis也能启动项目）
   redis:
-    host: localhost
+    host: ${REDIS_HOST:localhost}
     port: 6379
-    password:
+    password: ${REDIS_PASSWORD:}
     database: 0
 
 # MyBatis-Plus配置
@@ -41,7 +42,8 @@ mybatis-plus:
     db-config:
       id-type: auto
 
-# JWT配置（密钥固定，开发用）
+# JWT配置
+# 安全性：生产环境请通过环境变量 JWT_SECRET 覆盖（HS256 要求至少 32 字节）
 jwt:
   secret: ${JWT_SECRET:dev-only-secret-please-change-me-32bytes}
   expiration: 86400000

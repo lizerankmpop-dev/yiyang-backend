@@ -16,19 +16,20 @@ spring:
       max-request-size: 20MB
       file-size-threshold: 0B
 
+  # 安全性：数据库账号密码通过环境变量注入，请勿硬编码
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/yiyang?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowMultiQueries=true&useSSL=false
-    username: root
+    username: ${MYSQL_USERNAME:root}
     password: ${MYSQL_PASSWORD:}
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
 
   redis:
-    host: localhost
+    host: ${REDIS_HOST:localhost}
     port: 6379
-    password:
+    password: ${REDIS_PASSWORD:}
     database: 0
 
 mybatis-plus:
@@ -39,6 +40,7 @@ mybatis-plus:
     db-config:
       id-type: auto
 
+# 安全性：生产环境请通过环境变量 JWT_SECRET 覆盖
 jwt:
   secret: ${JWT_SECRET:dev-only-secret-please-change-me-32bytes}
   expiration: 86400000
